@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <script>
+        // functions!!
+        var i = 0;
+        var table = ["Bob's Kitchen's New Recipe","A new recipe from Bob's kitchen","From Bob's kitchen, a new recipe"]
+        var txt = getRandomItem(table);
+        
+        var speed = 35; 
+        
+        function getRandomItem(arr) {
+           
+            const randomIndex = Math.floor(Math.random() * arr.length);
+
+            const item = arr[randomIndex];
+
+            return item;
+        }
+        
+        function startTime() {
+            const today = new Date();
+            let h = today.getHours();
+            let m = today.getMinutes();
+            let s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML =  h - 12 + ":" + m 
+            setTimeout(startTime, 1000);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {i = "0" + i};  
+            return i;
+        }
+
+        
+        function animate(element) {
+            transition.begin(element, ["background-color", "#ffffff", "#ADB5C7", "500ms", "linear"]);
+        }    
+
+        function typeWriter() {
+            if (i < txt.length) {
+                var newtxt = txt.charAt(i)
+                newtxt.Opacity = 0;
+                
+                document.getElementById("Text").innerHTML += newtxt; 
+                i++;  
+                
+                setTimeout(typeWriter, speed);
+            }
+        }
+        window.onload = function(){
+            typeWriter()
+            startTime()
+            
+        }              
+    </script>
+    <!--Divs-->
+    <style>      
+            .BG {
+               background-color:#19191d; 
+            }
+
+            .Top { 
+                font-size:40px; font-family: 'Roboto Light';
+                font-style: normal; visibility: visible; 
+                position: relative; transition: font-size 2s;  color:#ffffff;  animation: Textopac 1s;    
+            }
+
+            .Box {
+                width: 200px;
+                border: 1px solid#ffffff;
+                padding: 50px;
+                margin: auto;      
+            }
+
+           
+
+            .Line {
+                width: 42%;               
+                color: #ffffff;
+                animation: Linewidth 2s;
+            }
+            
+
+            @keyframes Linewidth {
+                from{
+                    width: .5%;
+                }
+                to{
+                    width: 42%;
+                }
+            }
+
+            @keyframes Textopac {
+                from{
+                    opacity: .1;
+                }
+                to{
+                    opacity: 1;
+                }
+            }
+
+            @keyframes Lineheight {
+                from{
+                    width: .5%;
+                }
+                to{
+                    width: 32%;
+                } 
+            }
+    </style>
+    <title>Document </title>
+</head>
+<body style class="BG">  
+    <div class="LineVertical" ></div>
+    <hr class="Line">
+    <br>
+    <div id="Text" class="Top" style="text-align: center;"></div>
+    <br>
+    <hr class="Line">
+    <p id="txt" class="Top" style="top: -10%"></p>
+    
+   
+   
+    
+</body>
+</html>
